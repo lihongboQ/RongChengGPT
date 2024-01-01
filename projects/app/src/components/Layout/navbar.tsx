@@ -57,14 +57,14 @@ const Navbar = ({ unread }: { unread: number }) => {
       },
       ...(feConfigs?.show_appStore
         ? [
-          {
-            label: t('navbar.Store'),
-            icon: 'appStoreLight',
-            activeIcon: 'appStoreFill',
-            link: '/appStore',
-            activeLink: ['/appStore']
-          }
-        ]
+            {
+              label: t('navbar.Store'),
+              icon: 'appStoreLight',
+              activeIcon: 'appStoreFill',
+              link: '/appStore',
+              activeLink: ['/appStore']
+            }
+          ]
         : []),
       {
         label: t('navbar.Account'),
@@ -118,22 +118,22 @@ const Navbar = ({ unread }: { unread: number }) => {
             {...itemStyles}
             {...(item.activeLink.includes(router.pathname)
               ? {
-                color: 'primary.600',
-                bg: 'white',
-                boxShadow:
-                  '0px 0px 1px 0px rgba(19, 51, 107, 0.08), 0px 4px 4px 0px rgba(19, 51, 107, 0.05)'
-              }
-              : {
-                color: 'myGray.500',
-                bg: 'transparent',
-                _hover: {
-                  bg: 'rgba(255,255,255,0.9)'
+                  color: 'primary.600',
+                  bg: 'white',
+                  boxShadow:
+                    '0px 0px 1px 0px rgba(19, 51, 107, 0.08), 0px 4px 4px 0px rgba(19, 51, 107, 0.05)'
                 }
-              })}
+              : {
+                  color: 'myGray.500',
+                  bg: 'transparent',
+                  _hover: {
+                    bg: 'rgba(255,255,255,0.9)'
+                  }
+                })}
             {...(item.link !== router.asPath
               ? {
-                onClick: () => router.push(item.link)
-              }
+                  onClick: () => router.push(item.link)
+                }
               : {})}
           >
             <MyIcon

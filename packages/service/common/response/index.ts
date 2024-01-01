@@ -94,17 +94,10 @@ export const sseErrRes = (res: NextApiResponse, error: any) => {
   });
 };
 
-export function responseWriteController({
-  res,
-  readStream
-}: {
-  res: NextApiResponse;
-  readStream: any;
-}) {
+export function responseWriteController({ res, readStream }: { res: any; readStream: any }) {
   res.on('drain', () => {
     readStream?.resume?.();
   });
-
   return (text: string | Buffer) => {
     const writeResult = res.write(text);
     if (!writeResult) {
@@ -115,19 +108,17 @@ export function responseWriteController({
 
 export function responseWrite({
   res,
-  write,
+  // write,
   event,
   data
 }: {
   res?: NextApiResponse;
-  write?: (text: string) => void;
+  // write?: (text: string) => void;
   event?: string;
   data: string;
 }) {
-  const Write = write || res?.write;
-
+  const Write = res?.write;
   if (!Write) return;
-
   event && Write(`event: ${event}\n`);
   Write(`data: ${data}\n\n`);
 }

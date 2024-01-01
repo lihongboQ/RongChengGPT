@@ -36,9 +36,6 @@ export default withNextCors(async function handler(req: NextApiRequest, res: Nex
       file: fs.createReadStream(file.path),
       model: global.whisperModel.model
     });
-    console.log('🚀 ~ file: transcriptions.ts:39 ~ handler ~ result:', result);
-    console.log('🚀 ~ file: transcriptions.ts:39 ~ handler ~ result:', result);
-
     pushWhisperBill({
       teamId,
       tmbId,

@@ -86,9 +86,9 @@ const MessageInput = ({
             state.map((item) =>
               item.id === file.id
                 ? {
-                  ...item,
-                  src: `${location.origin}${src}`
-                }
+                    ...item,
+                    src: `${location.origin}${src}`
+                  }
                 : item
             )
           );
@@ -197,13 +197,13 @@ ${images.map((img) => JSON.stringify({ src: img.src })).join('\n')}
         overflow={'hidden'}
         {...(isPc
           ? {
-            border: '1px solid',
-            borderColor: 'rgba(0,0,0,0.12)'
-          }
+              border: '1px solid',
+              borderColor: 'rgba(0,0,0,0.12)'
+            }
           : {
-            borderTop: '1px solid',
-            borderTopColor: 'rgba(0,0,0,0.15)'
-          })}
+              borderTop: '1px solid',
+              borderTopColor: 'rgba(0,0,0,0.15)'
+            })}
       >
         {/* translate loading */}
         <Flex

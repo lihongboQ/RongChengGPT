@@ -225,9 +225,6 @@ const ChatBox = (
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const generatingMessage = ({ text = '', status, name }: generatingMessageProps) => {
-    console.log('🚀 ~ file: index.tsx:228 ~ generatingMessage ~ name:', name);
-    console.log('🚀 ~ file: index.tsx:228 ~ generatingMessage ~ status:', status);
-    console.log('🚀 ~ file: index.tsx:228 ~ generatingMessage ~ text:', text);
     setChatHistory((state) =>
       state.map((item, index) => {
         if (index !== state.length - 1) return item;
@@ -346,14 +343,7 @@ const ChatBox = (
         // create abort obj
         const abortSignal = new AbortController();
         chatController.current = abortSignal;
-        console.log('🚀 ~ file: index.tsx:350 ~ newChatList:', newChatList);
-        console.log('🚀 ~ file: index.tsx:350 ~ newChatList:', newChatList);
-        console.log('🚀 ~ file: index.tsx:350 ~ newChatList:', newChatList);
         const messages = adaptChat2GptMessages({ messages: newChatList, reserveId: true });
-        console.log('🚀 ~ file: index.tsx:350 ~ messages:', messages);
-        console.log('🚀 ~ file: index.tsx:350 ~ messages:', messages);
-        console.log('🚀 ~ file: index.tsx:350 ~ messages:', messages);
-
         const {
           responseData,
           responseText,

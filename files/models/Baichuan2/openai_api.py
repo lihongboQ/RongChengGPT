@@ -127,7 +127,7 @@ async def list_models():
     return ModelList(data=[model_card])
 
 
-@app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
+# @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
 async def create_chat_completion(request: ChatCompletionRequest):
     global model, tokenizer
     if request.messages[-1].role != "user":

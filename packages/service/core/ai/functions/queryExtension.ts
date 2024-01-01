@@ -30,7 +30,6 @@ export const searchQueryExtension = async ({ query, model }: { query: string; mo
     ],
     stream: false
   });
-
   const answer = result.choices?.[0]?.message?.content || '';
   if (!answer) {
     return {

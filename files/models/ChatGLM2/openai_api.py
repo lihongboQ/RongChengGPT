@@ -126,7 +126,7 @@ def expand_features(embedding, target_length):
     return expanded_embedding
 
 
-@app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
+# @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
 async def create_chat_completion(
     request: ChatCompletionRequest, token: bool = Depends(verify_token)
 ):

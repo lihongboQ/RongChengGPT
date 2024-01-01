@@ -27,7 +27,6 @@ export async function text2Speech({
     response_format: 'mp3',
     speed
   });
-
   const readableStream = response.body as unknown as NodeJS.ReadableStream;
   readableStream.pipe(res);
 

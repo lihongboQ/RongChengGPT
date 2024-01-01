@@ -135,8 +135,6 @@ ${replaceVariable(Prompt_AgentQA.fixedText, { text })}`;
       messages,
       stream: false
     });
-    console.log('🚀 ~ file: generateQA.ts:138 ~ generateQA ~ chatResponse:', chatResponse);
-    console.log('🚀 ~ file: generateQA.ts:138 ~ generateQA ~ chatResponse:', chatResponse);
     const answer = chatResponse.choices?.[0].message?.content || '';
     const totalTokens = chatResponse.usage?.total_tokens || 0;
 
