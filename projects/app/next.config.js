@@ -43,11 +43,27 @@ const nextConfig = {
 
     return config;
   },
+  // async devServer({ proxy }) {
+  //   return {
+  //     // 启用代理  
+  //     proxy: {
+  //       // 匹配请求路径的模式  
+  //       // 在这里，我们将所有以 "/api" 开头的请求都代理到 "<你的本地开发服务器地址>:<端口>"  
+  //       '/RongChengGPT': {
+  //         target: 'http://localhost:3000',
+  //         changeOrigin: true,
+  //         pathRewrite: {
+  //           '/RongChengGPT': 'http://18.221.12.198:5003/chatgpt', // 将所有代理请求的路径从 "/api" 改为 ""  
+  //         },
+  //       },
+  //     },
+  //   };
+  // },
   transpilePackages: ['@fastgpt/*'],
   experimental: {
     serverComponentsExternalPackages: ['mongoose', 'pg'],
     outputFileTracingRoot: path.join(__dirname, '../../')
-  }
+  },
 };
 
 module.exports = nextConfig;

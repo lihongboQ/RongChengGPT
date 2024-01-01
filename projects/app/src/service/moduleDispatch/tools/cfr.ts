@@ -65,6 +65,9 @@ A: ${systemPrompt}
     ],
     stream: false
   });
+  console.log('🚀 ~ file: cfr.ts:68 ~ result:', result);
+  console.log('🚀 ~ file: cfr.ts:68 ~ result:', result);
+  console.log('🚀 ~ file: cfr.ts:68 ~ result:', result);
 
   let answer = result.choices?.[0]?.message?.content || '';
   // console.log(

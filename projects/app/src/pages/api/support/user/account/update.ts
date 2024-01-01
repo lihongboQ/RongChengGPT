@@ -27,6 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         max_tokens: 1,
         messages: [{ role: 'user', content: 'hi' }]
       });
+      console.log('🚀 ~ file: update.ts:30 ~ handler ~ response:', response);
+      console.log('🚀 ~ file: update.ts:30 ~ handler ~ response:', response);
       if (response?.choices?.[0]?.message?.content === undefined) {
         throw new Error('Key response is empty');
       }

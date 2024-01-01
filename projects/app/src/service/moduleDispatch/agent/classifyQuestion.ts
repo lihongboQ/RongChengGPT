@@ -132,6 +132,8 @@ ${systemPrompt}
     ],
     tool_choice: { type: 'function', function: { name: agentFunName } }
   });
+  console.log('🚀 ~ file: classifyQuestion.ts:135 ~ response:', response);
+  console.log('🚀 ~ file: classifyQuestion.ts:135 ~ response:', response);
 
   try {
     const arg = JSON.parse(
@@ -181,6 +183,9 @@ Human:${userChatInput}`
     messages: adaptChat2GptMessages({ messages, reserveId: false }),
     stream: false
   });
+  console.log('🚀 ~ file: classifyQuestion.ts:186 ~ data:', data);
+  console.log('🚀 ~ file: classifyQuestion.ts:186 ~ data:', data);
+  console.log('🚀 ~ file: classifyQuestion.ts:186 ~ data:', data);
   const answer = data.choices?.[0].message?.content || '';
   const totalTokens = data.usage?.total_tokens || 0;
 

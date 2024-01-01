@@ -23,6 +23,7 @@ import type { SearchDataResponseItemType } from '@fastgpt/global/core/dataset/ty
 import { formatStr2ChatContent } from '@fastgpt/service/core/chat/utils';
 import { ModuleInputKeyEnum, ModuleOutputKeyEnum } from '@fastgpt/global/core/module/constants';
 import { getHistories } from '../utils';
+import axios from 'axios';
 
 export type ChatProps = ModuleDispatchProps<
   AIChatModuleProps & {
@@ -32,7 +33,7 @@ export type ChatProps = ModuleDispatchProps<
   }
 >;
 export type ChatResponse = {
-  [ModuleOutputKeyEnum.answerText]: string;
+  [ModuleOutputKeyEnum.answerText]: any;
   [ModuleOutputKeyEnum.responseData]: moduleDispatchResType;
   [ModuleOutputKeyEnum.history]: ChatItemType[];
 };
@@ -108,7 +109,6 @@ export const dispatchChatCompletion = async (props: ChatProps): Promise<ChatResp
   temperature = +(modelConstantsData.maxTemperature * (temperature / 10)).toFixed(2);
   temperature = Math.max(temperature, 0.01);
   const ai = getAIApi(user.openaiAccount, 480000);
-
   const concatMessages = [
     ...(modelConstantsData.defaultSystemChatPrompt
       ? [
@@ -131,38 +131,44 @@ export const dispatchChatCompletion = async (props: ChatProps): Promise<ChatResp
   if (concatMessages.length === 0) {
     return Promise.reject('core.chat.error.Messages empty');
   }
-
-  const response = await ai.chat.completions.create(
-    {
-      model,
-      temperature,
-      max_tokens,
-      stream,
-      presence_penalty: 0,
-      frequency_penalty: 0,
-      top_p: 1,
-      // seed: temperature < 0.3 ? 1 : undefined,
-      messages: concatMessages
-    },
-    {
-      headers: {
-        Accept: 'application/json, text/plain, */*'
-      }
-    }
-  );
-
+  // const RongChengGPTres: any = await axios.get(`http://18.221.12.198:5003/chatgpt?content=${concatMessages[concatMessages.length - 1].content}`)
+  const response: any = '';
+  // const response = await ai.chat.completions.create(
+  //   {
+  //     model,
+  //     temperature,
+  //     max_tokens,
+  //     stream,
+  //     presence_penalty: 0,
+  //     frequency_penalty: 0,
+  //     top_p: 1,
+  //     // seed: temperature < 0.3 ? 1 : undefined,
+  //     messages: concatMessages
+  //   },
+  //   {
+  //     headers: {
+  //       Accept: 'application/json, text/plain, */*'
+  //     }
+  //   }
+  // );
   const { answerText, totalTokens, completeMessages } = await (async () => {
     if (stream) {
       // sse response
-      const { answer } = await streamResponse({
-        res,
-        detail,
-        stream: response
-      });
-      // count tokens
+      // const { answer } = await streamResponse({
+      //   res,
+      //   detail,
+      //   stream: response
+      // });
+      const RongChengGPTres = await axios.get(
+        `http://18.221.12.198:5003/chatgpt?content=${
+          concatMessages[concatMessages.length - 1].content
+        }`
+      );
+      const data = RongChengGPTres.data;
+      const answer = await streamResponse({ res, detail, stream: data });
       const completeMessages = filterMessages.concat({
         obj: ChatRoleEnum.AI,
-        value: answer
+        value: data
       });
 
       const totalTokens = countMessagesTokens({
@@ -172,7 +178,7 @@ export const dispatchChatCompletion = async (props: ChatProps): Promise<ChatResp
       targetResponse({ res, detail, outputs });
 
       return {
-        answerText: answer,
+        answerText: data,
         totalTokens,
         completeMessages
       };
@@ -180,12 +186,10 @@ export const dispatchChatCompletion = async (props: ChatProps): Promise<ChatResp
       const unStreamResponse = response as ChatCompletion;
       const answer = unStreamResponse.choices?.[0]?.message?.content || '';
       const totalTokens = unStreamResponse.usage?.total_tokens || 0;
-
       const completeMessages = filterMessages.concat({
         obj: ChatRoleEnum.AI,
         value: answer
       });
-
       return {
         answerText: answer,
         totalTokens,
@@ -369,37 +373,39 @@ async function streamResponse({
   detail,
   stream
 }: {
-  res: NextApiResponse;
+  res: any;
   detail: boolean;
-  stream: StreamChatType;
+  stream: string;
 }) {
-  const write = responseWriteController({
-    res,
-    readStream: stream
-  });
-  let answer = '';
-  for await (const part of stream) {
-    if (res.closed) {
-      stream.controller?.abort();
-      break;
-    }
-    const content = part.choices?.[0]?.delta?.content || '';
-    answer += content;
-
+  // const write = responseWriteController({
+  //   res,
+  //   readStream: stream
+  // });
+  let answer: string = '';
+  await stream.split('').forEach((el: any, index: number) => {
+    answer += el;
     responseWrite({
-      write,
+      res,
       event: detail ? sseResponseEventEnum.answer : undefined,
       data: textAdaptGptResponse({
-        text: content
+        text: el
       })
     });
-  }
+  });
+  // for await (const part of RongChengGPTres) {
+  // if (res.closed) {
+  //   stream.controller?.abort();
+  //   break;
+  // }
+  // const content = part.choices?.[0]?.delta?.content || '';
+  // answer += content;
+  // }
 
   if (!answer) {
     return Promise.reject('Chat API is error or undefined');
   }
 
-  return { answer };
+  return answer;
 }
 
 function getHistoryPreview(completeMessages: ChatItemType[]) {

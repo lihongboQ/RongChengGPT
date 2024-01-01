@@ -167,6 +167,8 @@ ${description || '根据用户要求获取适当的 JSON 字符串。'}
     ],
     tool_choice: { type: 'function', function: { name: agentFunName } }
   });
+  console.log('🚀 ~ file: extract.ts:170 ~ response:', response);
+  console.log('🚀 ~ file: extract.ts:170 ~ response:', response);
 
   const arg: Record<string, any> = (() => {
     try {
@@ -222,6 +224,9 @@ Human: ${content}`
     messages: adaptChat2GptMessages({ messages, reserveId: false }),
     stream: false
   });
+  console.log('🚀 ~ file: extract.ts:227 ~ data:', data);
+  console.log('🚀 ~ file: extract.ts:227 ~ data:', data);
+  console.log('🚀 ~ file: extract.ts:227 ~ data:', data);
   const answer = data.choices?.[0].message?.content || '';
   const totalTokens = data.usage?.total_tokens || 0;
 

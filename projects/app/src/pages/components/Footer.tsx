@@ -25,13 +25,13 @@ const Footer = () => {
           {
             label: 'Sealos',
             onClick: () => {
-              window.open('https://github.com/labring/sealos', '_blank');
+              // window.open('https://github.com/labring/sealos', '_blank');
             }
           },
           {
             label: 'Laf',
             onClick: () => {
-              window.open('https://github.com/labring/laf', '_blank');
+              // window.open('https://github.com/labring/laf', '_blank');
             }
           }
         ]
@@ -42,13 +42,13 @@ const Footer = () => {
           {
             label: t('home.Footer Git'),
             onClick: () => {
-              window.open('https://github.com/labring/FastGPT', '_blank');
+              // window.open('https://github.com/labring/FastGPT', '_blank');
             }
           },
           {
             label: t('home.Footer Docs'),
             onClick: () => {
-              window.open(getDocPath('/docs/intro'), '_blank');
+              // window.open(getDocPath('/docs/intro'), '_blank');
             }
           }
         ]
@@ -59,7 +59,7 @@ const Footer = () => {
           {
             label: t('home.Footer Feedback'),
             onClick: () => {
-              window.open('https://github.com/labring/FastGPT/issues', '_blank');
+              // window.open('https://github.com/labring/FastGPT/issues', '_blank');
             }
           },
           {
@@ -116,7 +116,7 @@ const Footer = () => {
           ))}
         </Box>
       ))}
-      {isOpen && <CommunityModal onClose={onClose} />}
+      {/* {isOpen && <CommunityModal onClose={onClose} />} */}
     </Box>
   );
 };

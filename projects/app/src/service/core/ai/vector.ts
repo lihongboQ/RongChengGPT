@@ -50,7 +50,9 @@ export async function getVectorsByText({
           vectors: await Promise.all(res.data.map((item) => unityDimensional(item.embedding)))
         };
       });
-
+    console.log('🚀 ~ file: vector.ts:53 ~ result:', result);
+    console.log('🚀 ~ file: vector.ts:53 ~ result:', result);
+    console.log('🚀 ~ file: vector.ts:53 ~ result:', result);
     return result;
   } catch (error) {
     console.log(`Embedding Error`, error);
