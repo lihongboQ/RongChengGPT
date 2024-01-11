@@ -14,7 +14,9 @@ export const sendAuthCode = (data: {
   username: string;
   type: `${UserAuthTypeEnum}`;
   googleToken: string;
-}) => POST(`/plusApi/support/user/inform/sendAuthCode`, data);
+}) => {
+  return POST(`/plusApi/support/user/inform/sendAuthCode`, data);
+};
 
 export const getTokenLogin = () =>
   GET<UserType>('/support/user/account/tokenLogin', {}, { maxQuantity: 1 });

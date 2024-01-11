@@ -116,7 +116,6 @@ const Kb = () => {
   const { data, refetch, isFetching } = useQuery(['loadDataset', parentId], () => {
     return Promise.all([loadDatasets(parentId), getDatasetPaths(parentId)]);
   });
-
   const paths = data?.[1] || [];
 
   const formatDatasets = useMemo(

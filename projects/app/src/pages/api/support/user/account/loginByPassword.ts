@@ -35,13 +35,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       username,
       password
     });
-
     if (!user) {
       throw new Error('密码错误');
     }
 
     const userDetail = await getUserDetail({ tmbId, userId: user._id });
-
     const token = createJWT(userDetail);
     setCookie(res, token);
 

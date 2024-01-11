@@ -19,7 +19,6 @@ export default withNextCors(async function handler(req: NextApiRequest, res: Nex
   try {
     await connectToDatabase();
     const { collectionId, data, mode = TrainingModeEnum.chunk } = req.body as PushDatasetDataProps;
-
     if (!collectionId || !Array.isArray(data)) {
       throw new Error('collectionId or data is empty');
     }
@@ -40,7 +39,6 @@ export default withNextCors(async function handler(req: NextApiRequest, res: Nex
       collectionId,
       per: 'w'
     });
-
     jsonRes<PushDataResponse>(res, {
       data: await pushDataToDatasetCollection({
         ...req.body,
@@ -161,7 +159,6 @@ export async function checkModelValid({
   const {
     datasetId: { _id: datasetId, vectorModel, agentModel }
   } = await getCollectionWithDataset(collectionId);
-
   if (mode === TrainingModeEnum.chunk) {
     if (!collectionId) return Promise.reject(`CollectionId is empty`);
     const vectorModelData = getVectorModel(vectorModel);

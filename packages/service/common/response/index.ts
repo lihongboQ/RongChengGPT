@@ -108,16 +108,16 @@ export function responseWriteController({ res, readStream }: { res: any; readStr
 
 export function responseWrite({
   res,
-  // write,
+  write,
   event,
   data
 }: {
   res?: NextApiResponse;
-  // write?: (text: string) => void;
+  write?: (text: string) => void;
   event?: string;
   data: string;
 }) {
-  const Write = res?.write;
+  const Write = write || res?.write;
   if (!Write) return;
   event && Write(`event: ${event}\n`);
   Write(`data: ${data}\n\n`);

@@ -31,11 +31,9 @@ export async function getUserDetail({
     return Promise.reject(ERROR_ENUM.unAuthorization);
   })();
   const user = await MongoUser.findById(team.userId);
-
   if (!user) {
     return Promise.reject(ERROR_ENUM.unAuthorization);
   }
-
   return {
     _id: user._id,
     username: user.username,

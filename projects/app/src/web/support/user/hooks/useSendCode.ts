@@ -32,6 +32,8 @@ export const useSendCode = () => {
         await sendAuthCode({
           username,
           type,
+          // googleToken: ''
+          // googleToken: await getClientToken('6Lfk-kMpAAAAAKU82ar7GsTELQyi33r2jqbDm78G')
           googleToken: await getClientToken(feConfigs.googleClientVerKey)
         });
         setCodeCountDown(60);

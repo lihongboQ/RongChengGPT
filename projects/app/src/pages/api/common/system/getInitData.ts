@@ -46,6 +46,7 @@ const defaultFeConfigs: FastGPTFeConfigsType = {
   show_git: true,
   docUrl: '',
   openAPIDocUrl: '',
+  show_register: true,
   // docUrl: 'https://doc.fastgpt.in',
   // openAPIDocUrl: 'https://doc.fastgpt.in/docs/development/openapi',
   systemTitle: 'RongChengGPT',

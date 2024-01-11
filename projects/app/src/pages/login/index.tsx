@@ -93,13 +93,16 @@ const Login = () => {
 
           {feConfigs?.concatMd && (
             <Box
+              display={pageType == 'register' ? 'none' : ''}
               mt={8}
               color={'primary.700'}
               cursor={'pointer'}
               textAlign={'center'}
-              onClick={onOpen}
+              onClick={() => {
+                setPageType(PageTypeEnum.register);
+              }}
             >
-              无法登录，点击联系
+              无法登录，点击注册
             </Box>
           )}
         </Flex>

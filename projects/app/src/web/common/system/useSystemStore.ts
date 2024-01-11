@@ -62,10 +62,10 @@ export const useSystemStore = create<State>()(
         gitStar: 6100,
         async loadGitStar() {
           try {
-            const { data: git } = await axios.get('https://github.com/lihongboQ/RongChengGPT');
+            // const { data: git } = await axios.get('https://github.com/lihongboQ/RongChengGPT');
 
             set((state) => {
-              state.gitStar = git.stargazers_count;
+              state.gitStar = 6100;
             });
           } catch (error) {}
         }

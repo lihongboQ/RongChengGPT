@@ -11,12 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     await connectToDatabase();
     const { name, vectorModel, agentModel } = req.body as CreateTrainingBillProps;
-
     const { teamId, tmbId } = await authCert({ req, authToken: true, authApiKey: true });
-
     const vectorModelData = getVectorModel(vectorModel);
     const agentModelData = getQAModel(agentModel);
-
     const { billId } = await createTrainingBill({
       teamId,
       tmbId,
@@ -25,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       vectorModel: vectorModelData.name,
       agentModel: agentModelData.name
     });
-
     jsonRes<string>(res, {
       data: billId
     });

@@ -170,7 +170,6 @@ const Provider = ({
           qaPrompt: mode === TrainingModeEnum.qa ? prompt : '',
           hashRawText: hashStr(file.rawText)
         });
-
         // upload data
         const { insertLen } = await chunksUpload({
           collectionId,
@@ -186,6 +185,7 @@ const Provider = ({
       }
       return totalInsertion;
     },
+
     onSuccess(num) {
       toast({
         title: t('core.dataset.import.Import Success Tip', { num }),
